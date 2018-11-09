@@ -62,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
 //                pb.put("caption", "caption");
 //                pb.put("imageUrl", "image url");
 //                pb.put("created", new Date());
-
-// Add a new document with a generated ID
-                db.collection("photobucket").add(pb);
+//                db.collection("photobucket").add(pb);
                 Snackbar.make(view, "Added a Firestore document", Snackbar.LENGTH_LONG).show();
             }
         });
