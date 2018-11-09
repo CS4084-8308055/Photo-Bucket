@@ -28,8 +28,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "PB";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
