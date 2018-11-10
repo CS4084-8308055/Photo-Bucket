@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Map<String, Object> pb = new HashMap<>();
                 pb.put(Constants.KEY_CAPTION, captionEditText.getText().toString());
-                pb.put(Constants.KEY_URL, urlEditText.getText().toString()));
+                pb.put(Constants.KEY_URL, urlEditText.getText().toString());
                 pb.put(Constants.KEY_CREATED, new Date());
-                FirebaseFirestore.getInstance().collection(Constants.COLLECTION_PATH.add(pb));
+                FirebaseFirestore.getInstance().collection(Constants.COLLECTION_PATH).add(pb);
             }
         });
         builder.setNegativeButton(android.R.string.cancel, null);
