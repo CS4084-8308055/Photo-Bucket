@@ -1,5 +1,7 @@
 package ie.ul.davidbeck.photobucket;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -60,9 +62,17 @@ public class PhotoBucketAdapter extends RecyclerView.Adapter<PhotoBucketAdapter.
     class PhotoBucketViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mCaptionTextView;
-        public PhotoBucketViewHolder(@NonNull View itemView) {
+        public PhotoBucketViewHolder(@NonNull final View itemView) {
             super(itemView);
             mCaptionTextView = itemView.findViewById(R.id.itemview_caption);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context c = itemView.getContext();
+                    Intent intent = new Intent(c, PhotoBucketDetailActivity.class);
+                    c.startActivity(intent);
+                }
+            });
         }
     }
 }
