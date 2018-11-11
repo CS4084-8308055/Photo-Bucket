@@ -69,7 +69,9 @@ public class PhotoBucketAdapter extends RecyclerView.Adapter<PhotoBucketAdapter.
                 @Override
                 public void onClick(View v) {
                     Context c = itemView.getContext();
+                    DocumentSnapshot ds = mPhotoSnapshots.get(getAdapterPosition());
                     Intent intent = new Intent(c, PhotoBucketDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA_DOC_ID, ds.getId());
                     c.startActivity(intent);
                 }
             });

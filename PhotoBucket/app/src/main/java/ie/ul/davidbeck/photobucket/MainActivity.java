@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.photobucket_dialog, null, false);
         builder.setView(view);
-        final TextView captionEditText = findViewById(R.id.dialog_caption_edittext);
-        final TextView urlEditText = findViewById(R.id.dialog_url_edittext);
+        final TextView captionEditText = view.findViewById(R.id.dialog_caption_edittext);
+        final TextView urlEditText = view.findViewById(R.id.dialog_url_edittext);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
