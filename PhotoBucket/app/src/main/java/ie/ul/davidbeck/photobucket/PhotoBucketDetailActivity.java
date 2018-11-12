@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.koushikdutta.ion.Ion;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Text;
@@ -31,8 +33,8 @@ public class PhotoBucketDetailActivity extends AppCompatActivity {
 
     private DocumentReference mDocRef;
     private DocumentSnapshot mDocSnapshot;
-    private TextView mImageUrlTextView;
     private TextView mCaptionTextView;
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +42,12 @@ public class PhotoBucketDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo_bucket_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mImageUrlTextView = findViewById(R.id.detail_imageUrl);
         mCaptionTextView = findViewById(R.id.detail_caption);
+        mImageView = (ImageView)findViewById(R.id.detail_image);
 
         Intent receivedIntent = getIntent();
         String docId = receivedIntent.getStringExtra(Constants.EXTRA_DOC_ID);
 
-//        mImageUrlTextView.setText(docId);
-//        mCaptionTextView.setText(docId);
         mDocRef = FirebaseFirestore.getInstance().collection(Constants.COLLECTION_PATH).document(docId);
         mDocRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -57,8 +57,9 @@ public class PhotoBucketDetailActivity extends AppCompatActivity {
                     return;
                 }
                 if (documentSnapshot.exists()) {
+                    mDocSnapshot = documentSnapshot;
                     mCaptionTextView.setText((String)documentSnapshot.get(Constants.KEY_CAPTION));
-                    mImageUrlTextView.setText((String)documentSnapshot.get(Constants.KEY_URL));
+                    Ion.with(mImageView).load((String)documentSnapshot.get(Constants.KEY_URL));
                 }
             }
         });
@@ -76,6 +77,7 @@ public class PhotoBucketDetailActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.photobucket_dialog, null, false);
         builder.setView(view);
+        builder.setTitle("Edit Photo");
         final TextView captionEditText = view.findViewById(R.id.dialog_caption_edittext);
         final TextView urlEditText = view.findViewById(R.id.dialog_url_edittext);
 

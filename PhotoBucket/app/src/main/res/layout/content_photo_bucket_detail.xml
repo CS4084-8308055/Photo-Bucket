@@ -11,12 +11,11 @@
     tools:context=".PhotoBucketDetailActivity"
     tools:showIn="@layout/activity_photo_bucket_detail">
 
-    <TextView
-        android:id="@+id/detail_imageUrl"
+    <ImageView
+        android:id="@+id/detail_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_centerVertical="true"/>
+        android:layout_height="match_parent"
+        android:src="@android:drawable/sym_def_app_icon"/>
     <TextView
         android:id="@+id/detail_caption"
         android:layout_width="match_parent"
